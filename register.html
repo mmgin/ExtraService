@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация - Информационная поддержка</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 40px 0;
+        }
+        
+        .register-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .register-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .register-body {
+            padding: 40px;
+        }
+        
+        .btn-register {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 12px;
+            font-weight: 600;
+            width: 100%;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .password-strength {
+            height: 5px;
+            margin-top: 5px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="register-card">
+                    <div class="register-header">
+                        <i class="fas fa-user-plus fa-3x mb-3"></i>
+                        <h3>Создать аккаунт</h3>
+                        <p class="mb-0">Присоединяйтесь к IntraService</p>
+                    </div>
+                    <div class="register-body">
+                        <form id="registerForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Имя пользователя</label>
+                                    <input type="text" class="form-control" name="username" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Полное имя</label>
+                                    <input type="text" class="form-control" name="full_name" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Телефон</label>
+                                <input type="tel" class="form-control" name="phone" 
+                                       placeholder="+7 (999) 123-45-67">
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Отдел</label>
+                                    <select class="form-select" name="department">
+                                        <option value="">Выберите отдел</option>
+                                        <option value="it">IT отдел</option>
+                                        <option value="sales">Отдел продаж</option>
+                                        <option value="support">Техподдержка</option>
+                                        <option value="management">Руководство</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Должность</label>
+                                    <input type="text" class="form-control" name="position">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Пароль</label>
+                                <input type="password" class="form-control" id="password" 
+                                       name="password" required>
+                                <div class="password-strength" id="passwordStrength"></div>
+                                <small class="text-muted">
+                                    Пароль должен содержать минимум 8 символов, буквы и цифры
+                                </small>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Подтвердите пароль</label>
+                                <input type="password" class="form-control" id="confirmPassword" required>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="terms" required>
+                                    <label class="form-check-label" for="terms">
+                                        Я принимаю <a href="#">условия использования</a> и 
+                                        <a href="#">политику конфиденциальности</a>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn-register">
+                                <i class="fas fa-user-plus me-2"></i>Зарегистрироваться
+                            </button>
+                            
+                            <div class="auth-links text-center mt-3">
+                                <p class="mb-0">Уже есть аккаунт? <a href="login.html">Войти</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

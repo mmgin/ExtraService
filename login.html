@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход - Информационная поддержка</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .login-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .login-body {
+            padding: 40px;
+        }
+        
+        .form-floating {
+            margin-bottom: 20px;
+        }
+        
+        .btn-login {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 12px;
+            font-weight: 600;
+            width: 100%;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .auth-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .auth-links a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="login-card">
+                    <div class="login-header">
+                        <i class="fas fa-headset fa-3x mb-3"></i>
+                        <h3>IntraService</h3>
+                        <p class="mb-0">Вход в личный кабинет</p>
+                    </div>
+                    <div class="login-body">
+                        <form id="loginForm">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="email" name="email" 
+                                       placeholder="name@example.com" required>
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="form-floating">
+                                <input type="password" class="form-control" id="password" name="password" 
+                                       placeholder="Пароль" required>
+                                <label for="password">Пароль</label>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="remember">
+                                    <label class="form-check-label" for="remember">
+                                        Запомнить меня
+                                    </label>
+                                </div>
+                                <a href="#" class="text-primary">Забыли пароль?</a>
+                            </div>
+                            
+                            <button type="submit" class="btn-login">
+                                <i class="fas fa-sign-in-alt me-2"></i>Войти
+                            </button>
+                            
+                            <div class="auth-links">
+                                <p class="mb-0">Нет аккаунта? <a href="register.html">Зарегистрироваться</a></p>
+                            </div>
+                        </form>
+                        
+                        <div class="text-center mt-4">
+                            <p class="text-muted mb-2">Или войдите через:</p>
+                            <div class="d-flex justify-content-center gap-2">
+                                <button class="btn btn-outline-secondary" onclick="socialLogin('google')">
+                                    <i class="fab fa-google"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary" onclick="socialLogin('github')">
+                                    <i class="fab fa-github"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary" onclick="socialLogin('telegram')">
+                                    <i class="fab fa-telegram"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

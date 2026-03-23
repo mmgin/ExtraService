@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход для администратора - ExtraService</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0b0c1a 0%, #1a1f3a 50%, #0f1a2f 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .background span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+        }
+
+        .background span:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+        .background span:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+        .background span:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+
+        .background span:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .background span:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+
+        .background span:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+
+        .background span:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+
+        .background span:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+
+        .background span:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+
+        .background span:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+
+        .admin-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 450px;
+            margin: 20px;
+        }
+
+ 
+        .admin-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.8s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+ 
+        .admin-header {
+            background: linear-gradient(135deg, #1e1e3f 0%, #2a1e4a 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .admin-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.1) 50%);
+            background-size: 20px 20px;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .crown-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 10px 20px rgba(255,215,0,0.3));
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .admin-header h2 {
+            font-weight: 800;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .admin-header p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        .security-badge-header {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .security-badge-header i {
+            margin-right: 5px;
+            color: #ffd700;
+        }
+
+        /* Тело карточки */
+        .admin-body {
+            padding: 40px;
+            background: white;
+        }
+
+        /* Форма */
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2d3748;
+            font-size: 0.95rem;
+        }
+
+        .form-group label i {
+            margin-right: 8px;
+            color: #667eea;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #f8fafc;
+        }
+
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .input-wrapper input:focus + i {
+            color: #667eea;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #a0aec0;
+            font-size: 0.95rem;
+        }
+
+
+        .captcha-container {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 2px dashed #667eea;
+            text-align: center;
+        }
+
+        .captcha-question {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .captcha-question span {
+            color: #667eea;
+            font-size: 2.5rem;
+        }
+
+        .captcha-input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .captcha-input-wrapper input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .captcha-input-wrapper input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .refresh-captcha {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            background: white;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .refresh-captcha:hover {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+            transform: rotate(180deg);
+        }
+
+ 
+        .btn-admin-login {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #1e1e3f 0%, #2a1e4a 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .btn-admin-login::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-admin-login:hover::before {
+            left: 100%;
+        }
+
+        .btn-admin-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 30px -10px rgba(30, 30, 63, 0.5);
+        }
+
+        .btn-admin-login i {
+            margin-right: 10px;
+            transition: transform 0.3s;
+        }
+
+        .btn-admin-login:hover i {
+            transform: translateX(5px);
+        }
+
+
+        .security-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: #f0f9ff;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4299e1;
+        }
+
+        .security-indicator i {
+            font-size: 1.5rem;
+            color: #4299e1;
+        }
+
+        .security-indicator .indicator-text {
+            flex: 1;
+        }
+
+        .security-indicator .indicator-text .title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 3px;
+        }
+
+        .security-indicator .indicator-text .subtitle {
+            font-size: 0.85rem;
+            color: #718096;
+        }
+
+        .security-level {
+            display: flex;
+            gap: 5px;
+        }
+
+        .level-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #cbd5e0;
+        }
+
+        .level-dot.active {
+            background: #48bb78;
+            animation: pulse 1.5s infinite;
+        }
+
+
+        .admin-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .admin-links a {
+            color: #718096;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .admin-links a:hover {
+            color: #1e1e3f;
+        }
+
+        .admin-links a i {
+            font-size: 0.8rem;
+        }
+
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            animation: slideInRight 0.3s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .alert {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            padding: 15px 25px;
+        }
+
+
+        @media (max-width: 480px) {
+            .admin-body {
+                padding: 25px;
+            }
+            
+            .admin-header {
+                padding: 30px 20px;
+            }
+            
+            .admin-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .captcha-question {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+
+    <div id="notificationContainer" class="notification" style="display: none;"></div>
+
+
+    <div class="admin-container">
+        <div class="admin-card">
+
+            <div class="admin-header">
+                <div class="security-badge-header">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure Admin Access</span>
+                </div>
+                <div class="crown-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h2>Admin Panel</h2>
+                <p>Только для авторизованных администраторов</p>
+            </div>
+
+            <div class="admin-body">
+
+                <div class="security-indicator">
+                                        <i class="fas fa-shield-halved"></i>
+                    <div class="indicator-text">
+                        <div class="title">Защищенный вход</div>
+                        <div class="subtitle">Все действия логируются</div>
+                    </div>
+                    <div class="security-level">
+                        <span class="level-dot active"></span>
+                        <span class="level-dot active"></span>
+                        <span class="level-dot active"></span>
+                        <span class="level-dot"></span>
+                    </div>
+                </div>
+
+                <form id="adminLoginForm" action="admin_login_process.php" method="POST">
+
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-user"></i>
+                            Имя пользователя или email
+                        </label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" 
+                                   name="username" 
+                                   id="username"
+                                   placeholder="Введите username или email"
+                                   required
+                                   autocomplete="off"
+                                   value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-lock"></i>
+                            Пароль
+                        </label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" 
+                                   name="password" 
+                                   id="password"
+                                   placeholder="Введите пароль"
+                                   required
+                                   autocomplete="off">
+                        </div>
+                    </div>
+
+                    <!-- Капча -->
+                    <div class="captcha-container">
+                        <div class="captcha-question">
+                            <span id="num1">7</span> + <span id="num2">3</span> = ?
+                        </div>
+                        <div class="captcha-input-wrapper">
+                            <input type="number" 
+                                   name="captcha" 
+                                   id="captcha"
+                                   placeholder="Введите результат"
+                                   required
+                                   min="2"
+                                   max="20">
+                            <button type="button" class="refresh-captcha" onclick="refreshCaptcha()">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn-admin-login" id="submitBtn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Войти как администратор
+                    </button>
+
+
+                    <div class="attempts-info" id="attemptsInfo" style="display: none;">
+                        <i class="fas fa-clock"></i>
+                        <span>Осталось попыток: <span id="attemptsLeft">5</span></span>
+                    </div>
+                </form>
+
+                <div class="admin-links">
+                    <a href="index.php">
+                        <i class="fas fa-arrow-left"></i>
+                        На главную
+                    </a>
+                    <a href="login.php">
+                        <i class="fas fa-user"></i>
+                        Пользовательский вход
+                    </a>
+                </div>
+
+
+                <div class="last-login" id="lastLoginInfo" style="display: none;">
+                    <hr>
+                    <div class="text-center text-muted small">
+                        <i class="fas fa-history"></i>
+                        <span id="lastLoginText"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirmModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(135deg, #1e1e3f 0%, #2a1e4a 100%); color: white;">
+                    <h5 class="modal-title">
+                        <i class="fas fa-shield-alt me-2"></i>
+                        Подтверждение входа
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-crown" style="font-size: 3rem; color: #ffd700;"></i>
+                    </div>
+                    
+                    <p class="mb-3">Вы пытаетесь войти в административную панель.</p>
+                    
+                    <div class="security-details" style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">IP адрес:</span>
+                            <span class="fw-bold" id="userIP">192.168.1.100</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Браузер:</span>
+                            <span class="fw-bold" id="userBrowser">Chrome</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Время:</span>
+                            <span class="fw-bold" id="currentTime">12:34:56</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span class="text-muted">Дата:</span>
+                            <span class="fw-bold" id="currentDate">19.03.2026</span>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Все действия в админ-панели логируются!
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>Отмена
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="submitAdminForm()" id="confirmSubmitBtn">
+                        <i class="fas fa-check me-2"></i>Продолжить вход
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+
+        let loginAttempts = 0;
+        const maxAttempts = 5;
+        let captchaResult = 0;
+        
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            refreshCaptcha();
+            
+
+            getUserInfo();
+
+            checkLastLogin();
+            
+
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            
+
+            addInputListeners();
+        });
+        
+
+        function getUserInfo() {
+
+            document.getElementById('userIP').textContent = '192.168.' + Math.floor(Math.random() * 255) + '.' + Math.floor(Math.random() * 255);
+
+            const browser = getBrowser();
+            document.getElementById('userBrowser').textContent = browser;
+            
+
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+        }
+        
+
+        function updateDateTime() {
+            const now = new Date();
+
+            const timeStr = now.toLocaleTimeString('ru-RU');
+            document.getElementById('currentTime').textContent = timeStr;
+            
+
+            const dateStr = now.toLocaleDateString('ru-RU');
+            document.getElementById('currentDate').textContent = dateStr;
+        }
+        
+
+        function getBrowser() {
+            const userAgent = navigator.userAgent;
+            
+            if (userAgent.includes("Chrome")) return "Chrome";
+            if (userAgent.includes("Firefox")) return "Firefox";
+            if (userAgent.includes("Safari")) return "Safari";
+            if (userAgent.includes("Edge")) return "Edge";
+            if (userAgent.includes("Opera")) return "Opera";
+            
+            return "Неизвестный браузер";
+        }
+
+        function checkLastLogin() {
+            const lastLogin = localStorage.getItem('adminLastLogin');
+            
+            if (lastLogin) {
+                const lastLoginInfo = document.getElementById('lastLoginInfo');
+                const lastLoginText = document.getElementById('lastLoginText');
+                
+                lastLoginText.textContent = 'Последний вход: ' + lastLogin;
+                lastLoginInfo.style.display = 'block';
+            }
+        }
+
+        function addInputListeners() {
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            
+
+            passwordInput.addEventListener('copy', function(e) {
+                e.preventDefault();
+                showNotification('Копирование пароля запрещено', 'warning');
+            });
+            
+            passwordInput.addEventListener('cut', function(e) {
+                e.preventDefault();
+                showNotification('Вырезание пароля запрещено', 'warning');
+            });
+            
+
+            usernameInput.addEventListener('focus', function() {
+                this.parentElement.style.borderColor = '#667eea';
+            });
+            
+            usernameInput.addEventListener('blur', function() {
+                this.parentElement.style.borderColor = '#e2e8f0';
+            });
+        }
+        
+
+        function refreshCaptcha() {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            
+            document.getElementById('num1').textContent = num1;
+            document.getElementById('num2').textContent = num2;
+            
+            captchaResult = num1 + num2;
+        }
+        
+
+        function validateForm() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const captcha = document.getElementById('captcha').value;
+            
+            if (!username) {
+                showNotification('Введите имя пользователя', 'error');
+                return false;
+            }
+            
+            if (!password) {
+                showNotification('Введите пароль', 'error');
+                return false;
+            }
+            
+            if (password.length < 6) {
+                showNotification('Пароль должен быть минимум 6 символов', 'error');
+                return false;
+            }
+            
+            if (!captcha) {
+                showNotification('Введите результат капчи', 'error');
+                return false;
+            }
+            
+            if (parseInt(captcha) !== captchaResult) {
+                showNotification('Неверный результат капчи', 'error');
+                refreshCaptcha();
+                document.getElementById('captcha').value = '';
+                return false;
+            }
+            
+            return true;
+        }
+        
+        // Обработка отправки формы
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            // Валидация
+            if (!validateForm()) {
+                return;
+            }
+            
+            // Проверка попыток
+            if (loginAttempts >= maxAttempts) {
+                showNotification('Превышено количество попыток. Попробуйте позже.', 'error');
+                document.getElementById('submitBtn').disabled = true;
+                return;
+            }
+            
+            // Показываем модальное окно подтверждения
+            const modal = new bootstrap.Modal(document.getElementById('confirmModal'));
+            modal.show();
+        }
+        
+        // Отправка формы после подтверждения
+        function submitAdminForm() {
+            // Увеличиваем счетчик попыток
+            loginAttempts++;
+            
+            // Показываем информацию о попытках
+            showAttemptsInfo();
+            
+            // Блокируем кнопку
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Проверка...';
+            
+            // Скрываем модальное окно
+            const modal = bootstrap.Modal.getInstance(document.getElementById('confirmModal'));
+            modal.hide();
+            
+            // Имитация отправки (в реальности здесь будет fetch запрос)
+            setTimeout(function() {
+                // Сохраняем время последнего входа
+                const now = new Date();
+                localStorage.setItem('adminLastLogin', now.toLocaleString('ru-RU'));
+                
+                // Перенаправление (для демонстрации)
+                showNotification('Вход выполнен успешно! Перенаправление...', 'success');
+                
+                setTimeout(function() {
+                    window.location.href = 'admin_panel.html'; // Замените на реальный адрес
+                }, 2000);
+                
+            }, 2000);
+        }
+        
+        // Показ информации о попытках
+        function showAttemptsInfo() {
+            const attemptsLeft = maxAttempts - loginAttempts;
+            const attemptsInfo = document.getElementById('attemptsInfo');
+            const attemptsLeftSpan = document.getElementById('attemptsLeft');
+            
+            attemptsLeftSpan.textContent = attemptsLeft;
+            attemptsInfo.style.display = 'block';
+            
+            if (attemptsLeft <= 2) {
+                attemptsInfo.style.background = '#fed7d7';
+                attemptsInfo.style.color = '#c53030';
+            }
+        }
+        
+        // Показ уведомлений
+        function showNotification(message, type) {
+            const container = document.getElementById('notificationContainer');
+            
+            // Создаем уведомление
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type === 'error' ? 'danger' : type} alert-dismissible fade show`;
+            notification.role = 'alert';
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'error' ? 'exclamation-circle' : type === 'success' ? 'check-circle' : 'info-circle'} me-2"></i>
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            // Показываем контейнер
+            container.style.display = 'block';
+            container.innerHTML = '';
+            container.appendChild(notification);
+            
+            // Автоматически скрываем через 5 секунд
+            setTimeout(function() {
+                if (container.firstChild) {
+                    container.firstChild.remove();
+                }
+                container.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Привязываем обработчик к форме
+        document.getElementById('adminLoginForm').addEventListener('submit', handleFormSubmit);
+        
+        // Защита от перезагрузки при попытке закрыть страницу
+        window.addEventListener('beforeunload', function(e) {
+            // Только если есть несохраненные данные
+            if (document.getElementById('username').value || document.getElementById('password').value) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+    </script>
+</body>
+</html>

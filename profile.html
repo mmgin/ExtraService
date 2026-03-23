@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль - Информационная поддержка</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    
+
+    <section class="py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+              
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div class="position-relative d-inline-block">
+                                <img src="https://via.placeholder.com/150" 
+                                     class="rounded-circle img-thumbnail mb-3" 
+                                     style="width: 150px; height: 150px; object-fit: cover;" 
+                                     id="avatarPreview">
+                                <button class="btn btn-sm btn-primary position-absolute bottom-0 end-0"
+                                        onclick="document.getElementById('avatarInput').click()">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                                <input type="file" id="avatarInput" class="d-none" accept="image/*">
+                            </div>
+                            <h4 id="profileFullName">Имя пользователя</h4>
+                            <p class="text-muted" id="profilePosition">Должность</p>
+                            <p class="text-muted" id="profileDepartment">Отдел</p>
+                            
+                            <div class="d-grid gap-2 mt-3">
+                                <button class="btn btn-outline-primary" onclick="editProfile()">
+                                    <i class="fas fa-edit me-2"></i>Редактировать профиль
+                                </button>
+                                <button class="btn btn-outline-secondary" onclick="changePassword()">
+                                    <i class="fas fa-key me-2"></i>Сменить пароль
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-8">
+               
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Личная информация</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="profileForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Имя пользователя</label>
+                                        <input type="text" class="form-control" id="profileUsername" readonly>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="profileEmail" readonly>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Телефон</label>
+                                        <input type="tel" class="form-control" id="profilePhone" readonly>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Дата регистрации</label>
+                                        <input type="text" class="form-control" id="profileCreatedAt" readonly>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Последний вход</label>
+                                        <input type="text" class="form-control" id="profileLastLogin" readonly>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Роль</label>
+                                        <input type="text" class="form-control" id="profileRole" readonly>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                 
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Настройки уведомлений</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="notificationSettings">
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                                    <label class="form-check-label" for="emailNotifications">
+                                        Email уведомления о новых ответах
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="smsNotifications">
+                                    <label class="form-check-label" for="smsNotifications">
+                                        SMS уведомления о срочных заявках
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="telegramNotifications" checked>
+                                    <label class="form-check-label" for="telegramNotifications">
+                                        Telegram уведомления
+                                    </label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="browserNotifications" checked>
+                                    <label class="form-check-label" for="browserNotifications">
+                                        Браузерные уведомления
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="editProfileModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Редактирование профиля</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm">
+                        <div class="mb-3">
+                            <label class="form-label">Полное имя</label>
+                            <input type="text" class="form-control" name="full_name" id="editFullName">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Телефон</label>
+                            <input type="tel" class="form-control" name="phone" id="editPhone">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Отдел</label>
+                            <select class="form-select" name="department" id="editDepartment">
+                                <option value="">Выберите отдел</option>
+                                <option value="it">IT отдел</option>
+                                <option value="sales">Отдел продаж</option>
+                                <option value="support">Техподдержка</option>
+                                <option value="management">Руководство</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Должность</label>
+                            <input type="text" class="form-control" name="position" id="editPosition">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" onclick="saveProfile()">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+    <div class="modal fade" id="changePasswordModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Смена пароля</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="changePasswordForm">
+                        <div class="mb-3">
+                            <label class="form-label">Текущий пароль</label>
+                            <input type="password" class="form-control" name="current_password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Новый пароль</label>
+                            <input type="password" class="form-control" name="new_password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Подтвердите новый пароль</label>
+                            <input type="password" class="form-control" name="confirm_password" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" onclick="updatePassword()">Изменить пароль</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
